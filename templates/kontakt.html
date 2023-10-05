@@ -1,0 +1,75 @@
+{% extends 'main.html'%}{% block css %} 
+.contact-us {
+    padding: 50px 0px;
+}
+.section-title h2 {
+    font-size: 30px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    border-bottom: 5px solid #af8070;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+.contact-us input,
+.contact-us textarea {
+    background: #fafafa;
+}
+.contact-us textarea {
+    min-height: 188px;
+    max-width: 100%;
+}
+.contact-us .map {
+    overflow: hidden;
+    border-radius: 10px;
+}
+    {%endblock css %}
+    
+    {%block content %}
+    
+    <section class="contact-us">
+        <div class="container rounded p-3" style="background-color:rgb(197, 197, 197) ;">
+            <div class="row">
+                <div class="text-center mb-2">
+                    <div class="section-title">
+                        <h2>Lini mesazhin tuaj</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row ps-1">
+                <div class="col-lg-6">
+                    <form action="" method="POST" class="mb-4 mb-lg-0">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6 form-group my-2 d-flex">
+                                <label class="form-label fw-bold w-25">Emri*</label>
+                                <input type="text" value="{{user.firstname}}" name="name" class="form-control" id="name" readonly />
+                            </div>
+                            <div class="col-md-6 form-group my-2 d-flex">
+                                <label class="form-label fw-bold w-25">Email*</label>
+                                <input type="email" value="{{user.email}}" class="form-control" name="email" id="email" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group my-2 d-flex">
+                            <label class="form-label fw-bold w-25">Subjekti</label>
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subjekti..." />
+                        </div>
+                        <div class="form-group my-2">
+                            <label class="form-label fw-bold">Mesazhi</label>
+                            <textarea class="form-control" name="message" placeholder="Type Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Dergo </button>
+                    </form>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11986.546870289698!2d19.8215501!3d41.316766!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6c539e3ffce9fa68!2sUniversiteti%20Politeknik%20i%20Tiran%C3%ABs!5e0!3m2!1ssq!2s!4v1654349045897!5m2!1ssq!2s" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+    {% endblock content%} {% block title %}Kontakt{% endblock title %}

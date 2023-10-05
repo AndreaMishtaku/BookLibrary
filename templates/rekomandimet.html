@@ -1,0 +1,71 @@
+{% extends 'main.html'%}{% block css %} 
+body{
+    background-color:#eee;
+}
+.book-background{background-image: url("https://vimm.com/wp-content/uploads/2011/08/5star-reviews.jpg");
+height: 180px;
+background-position: 50% 30%;
+background-repeat: no-repeat;
+background-size: cover;
+opacity: 0.5;
+}
+@media (max-width: 770px) { .border-sm-start-none { border-left: none !important; } }
+{%endblock css %}
+    
+{%block content %}
+
+<div class="book-background ">
+  
+</div>
+
+
+  <section style="background-color: #eee;">
+    <div class="container py-4">
+    {% if rekomandimet|length > 0 %}
+    <h3 class="text-center text-primary fw-bold fst-italic my-3 " >Rekomanduar per ju</h3>
+    {% for liber in rekomandimet %}
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-12 col-xl-10">
+          <div class="card shadow-lg border rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src="{{liber.5}}"
+                      class="w-50 ms-5" />
+                    <a href="#!">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                  <h5>{{liber.1}}</h5>
+
+                  <h5 class="text-secondary fst-italic">{{liber.2}}</h5>
+                  
+                  <div class="mt-5 fs-5 fw-bold fst-italic">
+                    <span class="text-secondary"> Viti i publikimit:</span>
+                    <span class="text-info">{{liber.3}}</span>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                  <div class="d-flex flex-column mt-5">
+                    <a href={% url 'liber' pk=liber.0 %} class="btn btn-primary btn-sm" type="button">Me shume...</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>   
+       {% endfor %}
+      {% else %}
+      <h2 class="text-center fst-italic text-primary">Ju lutem jepni vleresimin tuaj per te marre sugjerime</h2> 
+      {% endif %}
+    </div>
+  </section>
+
+{% include 'footer.html' %}
+{% endblock content%} {% block title %}Rekomandimet{% endblock title %}

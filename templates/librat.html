@@ -1,0 +1,78 @@
+{% extends 'main.html'%}{% block css %} 
+.book-background{background-image: url("https://t3.ftcdn.net/jpg/03/52/36/40/360_F_352364010_AbEmy0ze2w2oQWyuI1usP0g8P2wRXOlX.jpg");
+height: 150px;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; 
+}
+@media (max-width: 770px) { .border-sm-start-none { border-left: none !important; } }
+{%endblock css %} {%block content %}
+
+<div class="book-background py-3">
+  <h3 class="text-center text-white fw-bold fst-italic mt-2" > Shtepite botuese dhe prodhimet e tyre</h3>
+  <form method="POST" action={% url "kerkimi" %} class="position-absolute end-0">
+    {% csrf_token %}
+    <div class="input-group me-3">
+      <div class="form-outline">
+        <input type="text" id="form1" class="form-control" name="searched" placeholder="Search..." />
+      </div>
+      <button type="submit" class="btn btn-warning">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </form>
+</div>
+  <section class="mt-0"style="background-color: #eee;">
+
+    {% for x in page.object_list %}
+    <div class="text-center container py-3">
+      <h4 class="mt-4 mb-5"><strong>{{x.0.publisher}}</strong></h4>
+      
+      <div class="row">
+
+        {% for liber in x|slice:"0:4" %}
+
+
+        <div class="col-lg-3 col-md-12 mb-4 h-75">
+          <div class="card">
+            <a href={% url 'liber' pk=liber.ISBN %}>
+            <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+              data-mdb-ripple-color="light">
+              <img src="{{liber.image_url}}"
+                alt="foto kopertine libri"
+                class="w-50 mt-2" />
+            </div>
+          </a>
+            <div class="card-body">
+                <h5 class="card-title mb-3 d-inline-block text-truncate"  style="max-width: 200px;">{{liber.book_title}}</h5>
+                <h6>{{liber.book_author}}</h6>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <ul class="pagination w-25 mx-auto">
+      {% if page.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number}}">Pas</a></li>
+      {% else %}
+      <li class="page-item disabled"><span class="page-link">Pas</span></li>
+      {% endif %}
+      {% for i in range %}
+        {% if page.number == i %}
+          <li class="page-item active" aria-current="page"><span class="page-link">{{ i }} </span></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+
+      {% if page.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number}}">Para</a></li>
+      {% else %}
+      <li class="page-item disabled"><span class="page-link">Next Page</span></li>
+      {% endif %}
+    </ul>
+
+  </section>
+{% include 'footer.html' %}
+{% endblock content%} {% block title %}Librat{% endblock title %}

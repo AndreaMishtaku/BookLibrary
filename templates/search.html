@@ -1,0 +1,53 @@
+{% extends 'main.html'%}{% block css %} 
+.book-background{background-image: url("https://t3.ftcdn.net/jpg/03/52/36/40/360_F_352364010_AbEmy0ze2w2oQWyuI1usP0g8P2wRXOlX.jpg");
+height: 150px;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; 
+}
+@media (max-width: 770px) { .border-sm-start-none { border-left: none !important; } }
+{%endblock css %} {%block content %}
+    <div class="book-background py-4">
+        <h3 class="text-center text-white fw-bold fst-italic mt-2" >Rezultati i kerkimit per {{kerkim}}</h3>
+    </div>
+    {% for liber in librat|slice:"0:10" %}
+    <section   class="pt-1" style="background-color: #eee;">
+    <div class="row justify-content-center mb-3 me-0">
+        <div class="col-md-10 col-xl-9">
+        <a href={% url 'liber' pk=liber.ISBN %}>
+          <div class="card shadow-lg border rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src="{{liber.image_url}}"
+                      class="w-50 ms-5" />
+                    <a href="#!">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 ">
+                  <h5>{{liber.book_title}}</h5>
+
+                  <h5 class="text-secondary fst-italic">{{liber.book_author}}</h5>
+                  <div class="d-flex flex-row fs-5">
+                  </div>
+                  
+                  <div class="mt-5 fs-5 fw-bold fst-italic">
+                    <span class="text-secondary"> Viti i publikimit:</span>
+                    <span class="text-info">{{liber.year_of_publication}}</span>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div>
+      </div>
+    </section>
+    {% endfor %}
+{% include 'footer.html' %}
+{% endblock content%} {% block title %}Kerkimi{% endblock title %}

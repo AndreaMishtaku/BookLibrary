@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+  <span class="navbar-brand fw-bold font-monospace fst-italic fs-3 ms-5">
+    <i class="bi-book"></i>
+    Bibloteka Virtuale</span
+  >
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  {% if request.user.is_authenticated %}
+  <div class="collapse navbar-collapse justify-content-between" id="nav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link text-info fs-5 fst-italic" href={% url "kryefaqja" %}><i class="bi bi-list pe-1"></i>Kreu </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-info fs-5 fst-italic" href={% url "librat" %}><i class="bi bi-wallet pe-1"></i>Te gjithe librat</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-info fs-5 fst-italic" href={% url "rekomandimet" %}><i class="bi bi-bookmark-star pe-1"></i>Rekomandimet</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-info fs-5 fst-italic" href={% url "kontakt" %}><i class="bi bi-chat-square-dots pe-1"></i>Kontakt</a>
+      </li>
+    </ul>
+      <div class="me-2">
+        <a class="btn btn-success px-3" href={% url "profili" %}><i class="bi bi-person-circle pe-2"></i>Profili</a>
+        <a class="btn btn-danger px-3" href={% url "dil" %}><i class="bi bi-box-arrow-right pe-2"></i>Dil</a> 
+      </div>
+    
+  </div>
+  {% endif %}
+</nav>
